@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings version="1">
+    <section id="plugin.video.phimnet">
+        <category id="downloads" label="32012">
+            <group id="1">
+                <setting id="download_path" type="string" label="32013">
+                    <level>0</level>
+                    <default>special://profile/addon_data/plugin.video.phimnet/downloads/</default>
+                    <control type="button" format="path">
+                        <heading>32013</heading>
+                    </control>
+                </setting>
+            </group>
+        </category>
+    </section>
+</settings>

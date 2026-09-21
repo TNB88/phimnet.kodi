@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.phimnet"
+       name="Phim Nét Online Repository"
+       version="1.0.0"
+       provider-name="Bình Pro">
+  <extension point="xbmc.addon.repository">
+    <dir minversion="19.0.0">
+      <info compressed="false">https://raw.githubusercontent.com/TNB88/phimnet.kodi/main/addons.xml</info>
+      <checksum>https://raw.githubusercontent.com/TNB88/phimnet.kodi/main/addons.xml.md5</checksum>
+      <datadir>https://raw.githubusercontent.com/TNB88/phimnet.kodi/main/</datadir>
+      <hashes>false</hashes>
+    </dir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="vi_VN">Kho cập nhật online cho addon Phim Nét</summary>
+    <summary lang="en_GB">Online updates for the Phim Net Kodi addon</summary>
+    <description lang="vi_VN">Cài một lần để Kodi nhận và tự động cập nhật các bản Phim Nét mới.</description>
+    <description lang="en_GB">Install once to receive future Phim Net updates directly in Kodi.</description>
+    <platform>all</platform>
+    <license>Private conversion</license>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.phimnet"
+       name="Phim Nét"
+       version="1.0.14"
+       provider-name="Bình Pro">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+    <import addon="inputstream.ffmpegdirect" version="21.0.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.repository" name="Phim Nét Online Repository">
+    <dir minversion="19.0.0">
+      <info compressed="false">https://raw.githubusercontent.com/TNB88/phimnet.kodi/main/addons.xml</info>
+      <checksum>https://raw.githubusercontent.com/TNB88/phimnet.kodi/main/addons.xml.md5</checksum>
+      <datadir>https://raw.githubusercontent.com/TNB88/phimnet.kodi/main/</datadir>
+      <hashes>false</hashes>
+    </dir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="vi_VN">Server Nét gốc với nhiều bản phim để lựa chọn</summary>
+    <summary lang="en_GB">Original high-bitrate movie server with selectable variants</summary>
+    <description lang="vi_VN">Duyệt phim từ Server Nét gốc, chọn bản 1080p/2160p/HDR/DV/REMUX theo dung lượng và phát trực tiếp trên Kodi.</description>
+    <description lang="en_GB">Browse the original high-bitrate source and select a 1080p, 2160p, HDR, DV or REMUX variant before playback.</description>
+    <platform>all</platform>
+    <license>Private conversion</license>
+    <assets>
+      <icon>resources/media/icon-phimnet-v2.png</icon>
+      <fanart>resources/media/fanart-phimnet-v2.png</fanart>
+    </assets>
+  </extension>
+</addon>

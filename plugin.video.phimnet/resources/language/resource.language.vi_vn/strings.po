@@ -1,0 +1,18 @@
+# Kodi Media Center language file
+# Addon Name: Phim Nét
+# Addon id: plugin.video.phimnet
+msgid ""
+msgstr ""
+"Project-Id-Version: Phim Nét\n"
+"Language: vi_VN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "#32012"
+msgid "Downloads"
+msgstr "Tải xuống"
+
+msgctxt "#32013"
+msgid "Download folder"
+msgstr "Thư mục lưu phim"

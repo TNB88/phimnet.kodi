@@ -2,7 +2,7 @@
 <addons>
   <addon id="plugin.video.phimnet"
          name="Phim Nét"
-         version="1.0.14"
+         version="1.0.15"
          provider-name="Bình Pro">
     <requires>
       <import addon="xbmc.python" version="3.0.0"/>

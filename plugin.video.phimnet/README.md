@@ -66,3 +66,8 @@ Phiên bản `1.0.14` bỏ các tên miền API/CDN cũ đã hỏng, đồng b�
 Phim4K TV và lưu cấu hình tốt gần nhất để dùng khi máy chủ cấu hình tạm gián đoạn.
 Addon đồng thời đăng ký kho cập nhật `TNB88/phimnet.kodi`; từ bản này trở đi Kodi
 có thể kiểm tra và tự cài bản mới trực tiếp trong mục cập nhật addon.
+
+Phiên bản `1.0.15` sửa đường truyền phụ đề từ API Phim4K sang Kodi. Các phụ đề
+đi kèm đúng bản phim/tập phim được gắn vào `ListItem` lúc phát, sắp phụ đề tiếng
+Việt lên đầu và loại URL trùng. Bản cũ đã đọc trường `subtitle` nhưng không chuyển
+nó vào trình phát nên Kodi báo không có phụ đề dù API thực tế đã trả phụ đề Việt.

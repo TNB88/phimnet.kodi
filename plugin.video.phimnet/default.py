@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import json
 import os
 import sys
 from urllib.parse import parse_qsl, urlencode, urlparse
@@ -78,6 +79,43 @@ def as_int(value, default=0):
         return int(value)
     except Exception:
         return default
+
+
+def subtitle_urls(subtitles):
+    """Return unique subtitle URLs with Vietnamese tracks first."""
+    ranked = []
+    seen = set()
+    for position, subtitle in enumerate(subtitles or []):
+        if isinstance(subtitle, dict):
+            url = str(subtitle.get("url") or "").strip()
+            language = " ".join([
+                str(subtitle.get("srclang") or ""),
+                str(subtitle.get("language") or ""),
+            ]).lower()
+        else:
+            url = str(subtitle or "").strip()
+            language = ""
+        if not url or url in seen:
+            continue
+        seen.add(url)
+        is_vietnamese = (
+            language.strip() in ("vi", "vie", "vietnamese")
+            or " vietnamese" in (" " + language)
+            or " vie" in (" " + language)
+        )
+        ranked.append((0 if is_vietnamese else 1, position, url))
+    ranked.sort(key=lambda entry: (entry[0], entry[1]))
+    return [entry[2] for entry in ranked]
+
+
+def decode_subtitles(value):
+    if not value:
+        return []
+    try:
+        decoded = json.loads(value)
+        return decoded if isinstance(decoded, list) else []
+    except Exception:
+        return []
 
 
 def art_for(movie=None):
@@ -313,6 +351,7 @@ def choose(params, download_only=False):
             movie["title"],
             variant["label"],
             variant.get("file_type"),
+            variant.get("subtitles"),
         )
 
 
@@ -340,6 +379,7 @@ def episodes(params):
             title=movie["title"],
             label="%s — %s" % (episode["season"], episode["name"]),
             file_type=episode.get("file_type"),
+            subtitles=json.dumps(episode.get("subtitles") or [], ensure_ascii=False),
         )
         add_download_context(
             item,
@@ -354,7 +394,7 @@ def episodes(params):
     end_directory("episodes")
 
 
-def resolve_play(api, source_url, title, label="", file_type=""):
+def resolve_play(api, source_url, title, label="", file_type="", subtitles=None):
     resolved = api.resolve_stream_url(source_url)
     # Keep byte offsets stable through HTTP proxies. The signed media worker
     # serves direct files as chunked responses but still honours Range.
@@ -408,6 +448,10 @@ def resolve_play(api, source_url, title, label="", file_type=""):
 
     item.setContentLookup(False)
     item.setInfo("video", {"title": title, "plot": label, "mediatype": "movie"})
+    urls = subtitle_urls(subtitles)
+    if urls:
+        item.setSubtitles(urls)
+        log("Attached %d subtitle track(s); Vietnamese is preferred" % len(urls))
     xbmcplugin.setResolvedUrl(HANDLE, True, item)
 
 
@@ -424,6 +468,7 @@ def play(params):
         params.get("title", "Phim Nét"),
         params.get("label", ""),
         params.get("file_type", ""),
+        decode_subtitles(params.get("subtitles", "")),
     )
 
 

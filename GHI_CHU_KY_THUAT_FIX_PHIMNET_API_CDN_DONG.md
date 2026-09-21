@@ -176,3 +176,37 @@ Thông tin file đã phát hành:
 - Không ghi đè các bản vá phát/tua/reconnect đã có từ Kodi 1.0.11–1.0.13.
 - Không phát hành nếu ZIP sai thư mục gốc, `addons.xml.md5` chưa cập nhật hoặc
   `plugins.json` không khớp hash/kích thước file thực tế.
+
+## 11. Bản vá phụ đề Kodi 1.0.15
+
+Lỗi xác nhận trên Dune Box R 4K Plus với phim ID `17926`:
+
+- API Phim4K trả đúng một phụ đề `Vietnamese`, `srclang=vi` cho bản phim đã chọn.
+- File video đang phát không có subtitle nhúng; chỉ có video và hai audio AC3.
+- Kodi addon 1.0.14 đã lưu trường `subtitle` vào `movie_variants()`/`tv_episodes()`
+  nhưng `choose()` và `play()` không chuyển trường này sang `resolve_play()`.
+- `resolve_play()` không gọi `ListItem.setSubtitles()`, vì vậy Kodi nhận 0 phụ đề
+  dù cùng nguồn đó trong ứng dụng Phim4K có phụ đề Việt.
+
+Bản 1.0.15:
+
+- Chuyển danh sách phụ đề của đúng bản phim/tập phim đến trình phát Kodi.
+- Sắp `vi`, `vie`, `Vietnamese` lên trước các ngôn ngữ khác.
+- Loại URL trùng và gắn bằng `ListItem.setSubtitles()` trước `setResolvedUrl()`.
+- Áp dụng cho cả phim lẻ chọn nguồn và phim bộ chọn tập.
+- Giữ nguyên API/CDN động, resolver, FFmpeg Direct, reconnect và tải phim.
+
+Kiểm thử thực tế trên Dune Box R 4K Plus (`192.168.1.13:5555`):
+
+- Kodi nhận addon `plugin.video.phimnet` phiên bản `1.0.15`.
+- Log xác nhận đã gắn 1 track phụ đề và ưu tiên tiếng Việt.
+- Trình phát tạo track phụ đề ASS và phụ đề Việt hiển thị đúng trên màn hình.
+- Người dùng đã xác nhận phim đang phát có phụ đề Việt.
+
+Gói phát hành:
+
+- File: `plugin.video.phimnet-1.0.15.zip`.
+- Kích thước: `3972430` byte.
+- SHA-256: `0BA28FBF2F13BCB0832ED625AF00EABC2D04B11323EC32AAD3D3B0C28F426BE3`.
+- ZIP chỉ chứa source/resources của addon, không chứa ZIP cũ, `__pycache__` hoặc
+  file `.pyc`.
